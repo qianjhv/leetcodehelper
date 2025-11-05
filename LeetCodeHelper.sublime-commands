@@ -1,0 +1,4 @@
+[
+  { "caption": "LeetCode: Edit Problem", "command": "leetcode_edit_problem" },
+  { "caption": "LeetCode: Test Problem", "command": "leetcode_test_problem" }
+]
