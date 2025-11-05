@@ -1,0 +1,16 @@
+[code]
+editor = "subl"
+test = true
+lang = "cpp"
+
+[cookies]
+csrf = ""
+session = ""
+site = "leetcode.com"
+
+[storage]
+cache = "Problems"
+code = "code"
+root = "~/Codes/leetcode"
+scripts = "scripts"
+
