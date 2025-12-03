@@ -82,7 +82,7 @@ class LeetcodeTestProblemCommand(sublime_plugin.WindowCommand):
             full_output = "".join(output)
             if "Accepted" in full_output:
                 print("\n" + "=" * 50)
-                print("🎉🎉🎉 Accepted {} 🎉🎉🎉")
+                print("🎉🎉🎉 Accepted 🎉🎉🎉")
                 print("✔️  All cases passed successfully!")
                 print("=" * 50 + "\n")
             else:
