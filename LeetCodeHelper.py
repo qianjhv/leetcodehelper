@@ -5,6 +5,7 @@ import os
 import threading
 import re
 
+# 
 class LeetcodeEditProblemCommand(sublime_plugin.WindowCommand):
     def run(self):
         self.window.show_input_panel("Enter problem number:", "", self.on_done, None, None)
@@ -28,6 +29,7 @@ class LeetcodeEditProblemCommand(sublime_plugin.WindowCommand):
         except Exception as e:
             sublime.error_message("⚠️ Error: {}".format(e))
 
+# 
 class LeetcodeTestProblemCommand(sublime_plugin.WindowCommand):
     def run(self):
         view = self.window.active_view()
@@ -43,7 +45,7 @@ class LeetcodeTestProblemCommand(sublime_plugin.WindowCommand):
             sublime.error_message("❌ Cannot detect problem number from file name.")
             return
 
-        # 只允许 cpp 文件
+        # only endwith .cpp file
         if not file_path.lower().endswith(".cpp"):
             sublime.error_message("❌ Only C++ (.cpp) files can be tested.")
             return
@@ -55,11 +57,11 @@ class LeetcodeTestProblemCommand(sublime_plugin.WindowCommand):
     def run_leetcode_test(self, problem_id):
         os.environ["PATH"] += os.pathsep + os.path.expanduser("~/.cargo/bin")
 
-        # 打开控制台
+        # open console
         self.window.run_command("show_panel", {"panel": "console"})
 
-        # 清空控制台（输出多个空行）
-        print("\n" * 100)
+        # put '\n' clear console
+        print("\n" * 40)
 
         try:
             cmd = ["leetcode", "test", problem_id]
@@ -67,16 +69,33 @@ class LeetcodeTestProblemCommand(sublime_plugin.WindowCommand):
                 cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, bufsize=1
             )
 
-            print("\n=== leetcode test {} ===\n".format(problem_id))
+            print("\n=== 🧪 Running leetcode test {} ===\n".format(problem_id))
 
-            # 实时输出
+            output = []
             for line in process.stdout:
+                output.append(line)
                 print(line, end='')
 
             process.wait()
+
+            # 
+            full_output = "".join(output)
+            if "Accepted" in full_output or "✓" in full_output:
+                print("\n" + "=" * 50)
+                print("🎉🎉🎉 TEST PASSED for Problem {} 🎉🎉🎉".format(problem_id))
+                print("✔️  All cases passed successfully!")
+                print("=" * 50 + "\n")
+            else:
+                print("\n" + "!" * 50)
+                print("❌❌❌ TEST FAILED for Problem {} ❌❌❌".format(problem_id))
+                print("✖️  Some test cases did NOT pass.")
+                print("✖️  Please check the output above for details.")
+                print("!" * 50 + "\n")
+
         except OSError:
             sublime.error_message(
                 "❌ Please install Rust version of leetcode-cli:\n  cargo install leetcode-cli"
             )
         except Exception as e:
             print("⚠️ Error:", e)
+
