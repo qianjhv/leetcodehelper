@@ -1,7 +1,9 @@
 Use [leetcode-cli](https://github.com/clearloop/leetcode-cli) to happy code!
 
+Add sublime keybinding `{ "keys": ["ctrl+k", "ctrl+e"], "command": "leetcode_edit_problem" }` to test
+
 Add sublime keybinding `{ "keys": ["ctrl+k", "ctrl+t"], "command": "leetcode_test_problem" }` to test
 
 Add sublime keybinding `{ "keys": ["ctrl+k", "ctrl+s"], "command": "leetcode_submit_problem" }` to submit
 
-See the leetcode-cli settings in `~/.leetcode/leetcode.toml` here `leetcode.toml` file
+See the leetcode-cli settings in `~/.leetcode/leetcode.toml`, sync to here `leetcode.toml` file
